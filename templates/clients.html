@@ -146,7 +146,8 @@
                             <td>{{i.nom}}</td>
                             <td>{{i.tel}}</td>
                             <td>{{i.manzil}}</td>
-                            <td><a href="#"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
+                            <td><a href="client_update/{{i.id}}/"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
+                            <td><a href="client_delete/{{i.id}}/"><button type="submit" class="btn btn-danger" data-toggle="modal">Ochirish</button></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

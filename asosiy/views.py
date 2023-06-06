@@ -3,6 +3,33 @@ from django.views import View
 from .models import Mahsulot
 from userapp.models import Ombor
 
+class ClientsDeleteView(View):
+    def get(self,request,pk):
+        if request.user.is_authenticated:
+            Mijoz.objects.filter(id=pk,ombor=Ombor.objects.filter(user=request.user)).delete()
+            return redirect('clientlar')
+        return redirect('login')
+
+class ClientsUpdateView(View):
+    def post(self,request,pk):
+        Mijoz.objects.filter(id=pk).update(
+            ism = request.POST.get('ism'),
+            nom = request.POST.get('nom'),
+            tel = request.POST.get('tel'),
+            manzil = request.POST.get('manzil'),
+        )
+        return redirect('clientlar')
+
+    def get(self,request,pk):
+        if request.user.is_authenticated:
+            content = {
+                'client':Mijoz.objects.get(id=pk,ombor=Ombor.objects.filter(user=request.user))
+            }
+            return render(request,'clientupdate.html')
+        return redirect('login')
+
+
+
 class ClientsView(View):
     def get(self,request):
         content = {
